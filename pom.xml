@@ -40,10 +40,9 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Support JSON serialization and deserialization of Hibernate specific datatypes and properties, especially lazy-loading aspects. -->
 		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-hibernate5</artifactId>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
 		</dependency>
 
 		<dependency>

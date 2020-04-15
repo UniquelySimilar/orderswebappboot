@@ -9,6 +9,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tcoveney.orderswebappboot.dao.CustomerDao;
 import com.tcoveney.orderswebappboot.dao.OrderDao;
@@ -28,11 +31,8 @@ import com.tcoveney.orderswebappboot.model.CustomerWithOrders;
 import com.tcoveney.orderswebappboot.model.Order;
 import com.tcoveney.orderswebappboot.validator.ValidationUtils;
 
-@RestController
-@RequestMapping("/api/customers")
-// "http://localhost:9000" - vue cli dev server
-// "http://vue-client-for-spring-rest.localhost" - Apache2 virtualhost for vue client
-@CrossOrigin(origins = {"http://localhost:9000", "http://vue-client-for-spring-rest.localhost"})
+@Controller
+@RequestMapping("/customers")
 public class CustomerController {
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
@@ -46,11 +46,11 @@ public class CustomerController {
 	private OrderDao orderDao;
 
 	@GetMapping("/")
-	public List<Customer> findAll() {
+	public ModelAndView findAll() {
 		//logger.debug("Called 'findAll()'");
 		List<Customer> customers = customerDao.findAll();
 		
-		return customers;	
+		return new ModelAndView("customer/index", "customers", customers);
 	}
 
 	@GetMapping("/orderby/lastname")

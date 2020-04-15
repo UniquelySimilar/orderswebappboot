@@ -27,7 +27,7 @@ public class CustomerDaoHibernateImpl implements CustomerDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Customer> findAll() {
-		//logger.debug("Called 'findAll()'");
+		logger.debug("Called 'findAll()'");
 		Session session = sessionFactory.getCurrentSession();
 		return session.createQuery("from Customer").list();
 	}

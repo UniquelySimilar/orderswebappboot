@@ -10,7 +10,7 @@
 				 -->				
 				
 				<c:choose>
-					<c:when test="${customerList.size() > 0}">
+					<c:when test="${customers.size() > 0}">
 						<table id="customer-table" class="table table-striped">
 							<thead>
 								<tr>
@@ -28,7 +28,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${customerList}" var="customer">
+								<c:forEach items="${customers}" var="customer">
 									<tr>
 										<td><c:out value="${ customer.lastName }"/></td>
 										<td><c:out value="${ customer.firstName }"/></td>
@@ -43,6 +43,7 @@
 											<a class="btn btn-default" href="${pageContext.request.contextPath}/customer/${customer.id}/edit" role="button">Edit</a>
 										</td>
 										<td>
+											<%--
 											<security:authorize access="hasRole('ROLE_ADMIN')">
 												<form:form id="form-delete-${customer.id}" cssClass="form-delete" method="DELETE"
 													action="${pageContext.request.contextPath}/customer/${customer.id}">
@@ -51,6 +52,8 @@
 													<button type="submit" class="btn btn-default submit-btn">Delete</button>
 												</form:form>
 											</security:authorize>
+											--%>
+											&npsp;
 										</td>
 									</tr>
 								</c:forEach>
