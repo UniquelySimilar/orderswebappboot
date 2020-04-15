@@ -1,0 +1,7 @@
+.classpath
+.project
+.settings/
+HELP.md
+target/
+src/main/resources/application.properties
+
