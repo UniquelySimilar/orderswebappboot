@@ -14,12 +14,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.tcoveney.orderswebappboot.model.Customer;
 import com.tcoveney.orderswebappboot.model.Order;
 import com.zaxxer.hikari.HikariDataSource;
 
 @SpringBootApplication(exclude=HibernateJpaAutoConfiguration.class)
+@EnableTransactionManagement
 public class Application {
 
 	public static void main(String[] args) {

@@ -53,7 +53,7 @@
 												</form:form>
 											</security:authorize>
 											--%>
-											&npsp;
+											&nbsp;
 										</td>
 									</tr>
 								</c:forEach>

@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/bootstrap.css" />">
+	href="<c:url value="/css/bootstrap.css" />">
 <title>Login</title>
 </head>
 <body>
@@ -48,7 +48,7 @@
 		</div>
 	</div>
 
-	<script src="<c:url value="/resources/js/jquery.js" />"></script>
-	<script src="<c:url value="/resources/js/bootstrap.js" />"></script>
+	<script src="<c:url value="/js/jquery.js" />"></script>
+	<script src="<c:url value="/js/bootstrap.js" />"></script>
 </body>
 </html>
