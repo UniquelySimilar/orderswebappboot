@@ -18,12 +18,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	http.authorizeRequests()
-    	.antMatchers("/css/**").permitAll()
-    	.antMatchers("/js/**").permitAll()
+    	.antMatchers("/css/**", "/js/**").permitAll()
     	.anyRequest().authenticated()
         .and()
-        //.formLogin();
-        .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/customers/");
+        .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/customers/", true);
+    	// NOTE: From FormLoginConfigurer javadoc for method 'loginPage()':
+    	//   If a URL is specified or this is not being used in conjunction with WebSecurityConfigurerAdapter,
+    	//   users are required to process the specified URL to generate a login page. (See 'LoginController')
     }
     
     @Override
