@@ -9,7 +9,7 @@ public interface CustomerDao {
 	public List<Customer> findAllOrderByLastName();
 	public Customer find(int id);
 	public List<Customer> findByLastName(String lastName);
-	public int insert(Customer customer);
+	public int save(Customer customer);
 	public void update(Customer customer);
 	public void delete(int id);
 }

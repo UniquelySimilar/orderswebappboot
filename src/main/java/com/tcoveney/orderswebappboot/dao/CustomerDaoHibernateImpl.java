@@ -27,7 +27,6 @@ public class CustomerDaoHibernateImpl implements CustomerDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Customer> findAll() {
-		logger.debug("Called 'findAll()'");
 		Session session = sessionFactory.getCurrentSession();
 		return session.createQuery("from Customer").list();
 	}
@@ -54,7 +53,7 @@ public class CustomerDaoHibernateImpl implements CustomerDao {
 	}
 
 	@Override
-	public int insert(Customer customer) {
+	public int save(Customer customer) {
 		Session session = sessionFactory.getCurrentSession();
 		return (Integer)session.save(customer);
 	}

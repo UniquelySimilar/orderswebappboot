@@ -2,7 +2,7 @@
 	
 		<div class="row">
 			<div class="col-md-12">
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/customer/create" role="button">Add Customer</a>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/customers/create" role="button">Add Customer</a>
 				<h3>Customer List</h3>
 				
 				<!-- Used to seed customers table
@@ -43,16 +43,14 @@
 											<a class="btn btn-default" href="${pageContext.request.contextPath}/customer/${customer.id}/edit" role="button">Edit</a>
 										</td>
 										<td>
-											<%--
 											<security:authorize access="hasRole('ROLE_ADMIN')">
 												<form:form id="form-delete-${customer.id}" cssClass="form-delete" method="DELETE"
-													action="${pageContext.request.contextPath}/customer/${customer.id}">
+													action="${pageContext.request.contextPath}/customers/${customer.id}">
 													<input type="hidden" name="customerId" value="${customer.id}"/>
 													<input type="hidden" name="customerName" value="${customer.firstName}${' '}${customer.lastName}"/>
 													<button type="submit" class="btn btn-default submit-btn">Delete</button>
 												</form:form>
 											</security:authorize>
-											--%>
 											&nbsp;
 										</td>
 									</tr>
