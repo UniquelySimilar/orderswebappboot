@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,15 +27,11 @@ import com.tcoveney.orderswebappboot.dao.OrderDao;
 import com.tcoveney.orderswebappboot.model.Customer;
 import com.tcoveney.orderswebappboot.model.CustomerWithOrders;
 import com.tcoveney.orderswebappboot.model.Order;
-import com.tcoveney.orderswebappboot.validator.ValidationUtils;
 
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
-
-	@Autowired
-	private ValidationUtils validationUtils;
 	
 	@Autowired
 	private CustomerDao customerDao;
@@ -76,7 +70,6 @@ public class CustomerController {
 //		CustomerWithOrders cwo = new CustomerWithOrders();
 //		Customer customer = customerDao.find(customerId);
 //		if (null == customer) {
-//			throw new ResourceNotFoundException();
 //		}
 //		else {
 //			List<Order> orders = orderDao.findByCustomer(customerId);
@@ -104,8 +97,8 @@ public class CustomerController {
 		return new ModelAndView("customer/edit", "customer", customer);
 	}
 	
-	@PutMapping(value = "/update")
-	public String update(@ModelAttribute @Valid Customer customer, BindingResult bindingResult) {
+	@PostMapping(value = "/update")
+	public String update(@Valid @ModelAttribute Customer customer, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return "customer/edit";
 		}

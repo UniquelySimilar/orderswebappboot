@@ -2,8 +2,7 @@
 
 		<div class="row">
 			<div class="col-md-8 col-md-offset-4">
-				<form:form modelAttribute="customer" method="PUT"
-					action="${pageContext.request.contextPath}/customers/update" cssClass="form-horizontal">
+				<form:form modelAttribute="customer" action="${pageContext.request.contextPath}/customers/update" cssClass="form-horizontal">
 					
 					<form:hidden path="id"/>
 
@@ -93,10 +92,10 @@
 							<div class="col-md-5">
 								<form:input path="homePhone" cssClass="form-control" htmlEscape="true"/>
 							</div>
-						</div>
 							<div class="col-md-5">
 								<span class="required">*&nbsp;</span><form:errors path="homePhone" cssClass="error-text"/>
 							</div>
+						</div>
 					</div>
 					<div class="form-group">
 						<div class="row">

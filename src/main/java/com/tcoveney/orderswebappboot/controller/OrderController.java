@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcoveney.orderswebappboot.dao.OrderDao;
-import com.tcoveney.orderswebappboot.exception.ResourceNotFoundException;
 import com.tcoveney.orderswebappboot.model.Order;
-import com.tcoveney.orderswebappboot.validator.ValidationUtils;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -31,9 +29,6 @@ public class OrderController {
 	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 	
 	@Autowired
-	private ValidationUtils validationUtils;
-	
-	@Autowired
 	private OrderDao orderDao;
 	
 	@GetMapping("/{id}")
@@ -41,7 +36,7 @@ public class OrderController {
 		//logger.debug("Called 'find()'");
 		Order order = orderDao.find(id);
 		if (null == order) {
-			throw new ResourceNotFoundException();
+			// TODO
 		}
 		return order;
 	}
@@ -51,7 +46,7 @@ public class OrderController {
 		//logger.debug(order.toString());
 		// NOTE: Since Order.customerID is NOT nullable and NOT updatable, it is ignored by this update
 		if (bindingResult.hasErrors()) {
-			validationUtils.createValidationErrorsResponse(bindingResult, response);
+			// TODO
 		}
 		else {
 			orderDao.insert(order);
@@ -64,7 +59,7 @@ public class OrderController {
 	public void update(@RequestBody @Valid Order order, BindingResult bindingResult, HttpServletResponse response) {
 		//logger.debug(order.toString());
 		if (bindingResult.hasErrors()) {
-			validationUtils.createValidationErrorsResponse(bindingResult, response);
+			// TODO
 		}
 		else {
 			orderDao.update(order);
