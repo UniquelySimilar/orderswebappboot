@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-8 col-md-offset-4">
 				<form:form modelAttribute="customer" method="PUT"
-					action="${pageContext.request.contextPath}/customer/update" cssClass="form-horizontal">
+					action="${pageContext.request.contextPath}/customers/update" cssClass="form-horizontal">
 					
 					<form:hidden path="id"/>
 
@@ -16,7 +16,7 @@
 								<form:input path="firstName" cssClass="form-control" htmlEscape="true"/>
 							</div>
 							<div class="col-md-5">
-								<form:errors path="firstName" cssStyle="color: red;"/>
+								<span class="required">*&nbsp;</span><form:errors path="firstName" cssClass="error-text"/>
 							</div>
 						</div>
 					</div>
@@ -29,7 +29,7 @@
 								<form:input path="lastName" cssClass="form-control" htmlEscape="true"/>
 							</div>
 							<div class="col-md-5">
-								<form:errors path="lastName" cssStyle="color: red;"/>
+								<span class="required">*&nbsp;</span><form:errors path="lastName" cssClass="error-text"/>
 							</div>
 						</div>
 					</div>
@@ -41,6 +41,9 @@
 							<div class="col-md-5">
 								<form:input path="street" cssClass="form-control" htmlEscape="true"/>
 							</div>
+							<div class="col-md-5">
+								<span class="required">*&nbsp;</span><form:errors path="street" cssClass="error-text"/>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -50,6 +53,9 @@
 							</div>
 							<div class="col-md-5">
 								<form:input path="city" cssClass="form-control" htmlEscape="true"/>
+							</div>
+							<div class="col-md-5">
+								<span class="required">*&nbsp;</span><form:errors path="city" cssClass="error-text"/>
 							</div>
 						</div>
 					</div>
@@ -61,6 +67,9 @@
 							<div class="col-md-5">
 								<form:select path="state" items="${stateList}" cssClass="form-control"/>
 							</div>
+							<div class="col-md-5">
+								<span class="required">*&nbsp;</span><form:errors path="state" cssClass="error-text"/>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -70,6 +79,9 @@
 							</div>
 							<div class="col-md-5">
 								<form:input path="zipcode" cssClass="form-control" htmlEscape="true"/>
+							</div>
+							<div class="col-md-5">
+								<span class="required">*&nbsp;</span><form:errors path="zipcode" cssClass="error-text"/>
 							</div>
 						</div>
 					</div>
@@ -82,6 +94,9 @@
 								<form:input path="homePhone" cssClass="form-control" htmlEscape="true"/>
 							</div>
 						</div>
+							<div class="col-md-5">
+								<span class="required">*&nbsp;</span><form:errors path="homePhone" cssClass="error-text"/>
+							</div>
 					</div>
 					<div class="form-group">
 						<div class="row">
@@ -101,11 +116,14 @@
 							<div class="col-md-5">
 								<form:input path="email" cssClass="form-control" htmlEscape="true"/>
 							</div>
+							<div class="col-md-5">
+								<span class="required">*&nbsp;</span><form:errors path="email" cssClass="error-text"/>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<button type="submit" class="btn btn-default">Update</button>
-						<a class="btn btn-default" href="${pageContext.request.contextPath}/customer" role="button">Cancel</a>
+						<a class="btn btn-default" href="${pageContext.request.contextPath}/customers/" role="button">Cancel</a>
 					</div>
 				</form:form>
 			</div>

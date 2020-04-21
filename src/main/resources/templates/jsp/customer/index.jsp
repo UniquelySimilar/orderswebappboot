@@ -40,7 +40,7 @@
 										<td><c:out value="${ customer.workPhone }"/></td>
 										<td><c:out value="${ customer.email }"/></td>
 										<td>
-											<a class="btn btn-default" href="${pageContext.request.contextPath}/customer/${customer.id}/edit" role="button">Edit</a>
+											<a class="btn btn-default" href="${pageContext.request.contextPath}/customers/${customer.id}/edit" role="button">Edit</a>
 										</td>
 										<td>
 											<security:authorize access="hasRole('ROLE_ADMIN')">

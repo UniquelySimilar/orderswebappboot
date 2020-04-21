@@ -98,14 +98,20 @@ public class CustomerController {
 		return "redirect:/customers/";
 	}
 	
-	@PutMapping(value = "/", headers = "content-type=application/json")
-	public void update(@RequestBody @Valid Customer customer, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+	@GetMapping("/{id}/edit")
+	public ModelAndView displayEditForm(@PathVariable int id) {
+		Customer customer = customerDao.find(id);
+		return new ModelAndView("customer/edit", "customer", customer);
+	}
+	
+	@PutMapping(value = "/update")
+	public String update(@ModelAttribute @Valid Customer customer, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			validationUtils.createValidationErrorsResponse(bindingResult, response);
+			return "customer/edit";
 		}
-		else {
-			customerDao.update(customer);
-		}
+		customerDao.update(customer);
+		
+		return "redirect:/customers/";
 	}
 	
 	@DeleteMapping("/{id}")
