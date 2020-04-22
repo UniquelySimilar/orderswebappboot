@@ -16,9 +16,10 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    	<p class="navbar-text">Signed in as
+    	<p class="navbar-text">
+        	<span>Signed in as </span>
         	<span>
-        		<strong>&nbsp;
+        		<strong>
 			        <security:authorize access="isAuthenticated()">
 			        	<security:authentication property="principal.username" />
 			        </security:authorize>

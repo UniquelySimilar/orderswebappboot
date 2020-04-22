@@ -20,7 +20,7 @@
 	<script src="<c:url value="/js/bootstrap.js" />"></script>
 	<script src="<c:url value="/js/jquery.dataTables.js" />"></script>
 	<script src="<c:url value="/js/dataTables.bootstrap.js" />"></script>
+
+	<%@ include file="navbar.jsp" %>
 	
 	<div class="container-fluid">
-	
-		<%@ include file="navbar.jsp" %>
