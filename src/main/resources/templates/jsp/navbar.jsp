@@ -28,7 +28,7 @@
     	</p>
       <ul class="nav navbar-nav">
         <li id="web-app-nav-option" class="active">
-            <a href="${pageContext.request.contextPath}/customer">Customer Manager</a>
+            <a href="${pageContext.request.contextPath}/customers/">Customer Manager</a>
         </li>
         <!-- This link opens a REST client UI used to test this application's alternate REST implementation.  Now using external client app.
         <li id="web-svc-client-nav-option">
