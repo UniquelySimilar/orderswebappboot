@@ -66,7 +66,6 @@
 				</c:choose>
 			</div>
 		</div>
-	</div>
 
 	<div id="delete-modal" class="modal fade" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-sm" role="document">
@@ -145,5 +144,5 @@
 		});
 	});
 	</script>
-</body>
-</html>
+
+<%@ include file="../footer.jsp" %>
