@@ -1,5 +1,26 @@
 @CHARSET "UTF-8";
 
+#main-menu {
+	margin-bottom: 0.7em;
+}
+
 .required, .error-text {
 	color: red;
+}
+
+.list-title {
+	font-size: 1.3em;
+	font-weight: bold;
+	vertical-align: middle;
+	margin-right: 2em;
+}
+
+#page-nav {
+	display: inline-block;
+}
+
+#current-page {
+	display: inline-block;
+	margin: 21px 0 19px 10px;
+	vertical-align: top;
 }

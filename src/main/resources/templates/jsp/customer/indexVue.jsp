@@ -5,40 +5,32 @@
 
 <div id="customer-list" class="row">
 	<div class="col-md-12">
+		<span class="list-title">Customer List</span>
 		<a class="btn btn-default"
 			href="${pageContext.request.contextPath}/customers/create"
-			role="button">Add Customer</a>
-		<h3>Customer List</h3>
-		<table id="customer-table" class="table table-striped">
+			role="button">Create Customer</a>
+		<table id="customer-table" class="table table-striped table-bordered">
 			<thead>
 				<tr>
 					<th>Last Name</th>
 					<th>First Name</th>
-					<th>Street</th>
 					<th>City</th>
 					<th>State</th>
 					<th>Zip Code</th>
-					<th>Home Phone</th>
-					<th>Work Phone</th>
 					<th>Email</th>
 					<th></th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="customer in customers" v-bind:key="customer.id">
+				<tr v-for="customer in currentPageCustomers" v-bind:key="customer.id">
 					<td>{{ customer.lastName }}</td>
 					<td>{{ customer.firstName }}</td>
-					<td>{{ customer.street }}</td>
 					<td>{{ customer.city }}</td>
 					<td>{{ customer.state }}</td>
 					<td>{{ customer.zipcode }}</td>
-					<td>{{ customer.homePhone }}</td>
-					<td>{{ customer.workPhone }}</td>
 					<td>{{ customer.email }}</td>
-					<td><a class="btn btn-default"
-						v-bind:href="'${pageContext.request.contextPath}/customers/' + customer.id + '/edit'"
-						role="button">Edit</a></td>
+					<td><a v-bind:href="'${pageContext.request.contextPath}/customers/' + customer.id + '/edit'" role="button">Edit</a></td>
 					<td>
 						<!-- 
 								<security:authorize access="hasRole('ROLE_ADMIN')">
@@ -54,6 +46,29 @@
 				</tr>
 			</tbody>
 		</table>
+		<nav id="page-nav" aria-label="Page navigation">
+			<ul class="pagination">
+				<li>
+					<a href="#" v-on:click="goToFirstPage()">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li><a href="#" aria-label="Previous" v-on:click="decrementPage()">prev</a></li>
+				<li><a href="#" aria-label="Next" v-on:click="incrementPage()">next</a></li>
+				<li>
+					<a href="#" v-on:click="goToLastPage()">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<div id="current-page">
+			<label style="margin: 0 0.4em; font-weight: normal;">Page</label>
+			<select v-model="currentPage">
+				<option v-for="page in pageList" v-bind:key="page">{{page}}</option>
+			</select>
+			<span> of {{pageCount}}</span>
+		</div>
 	</div>
 </div>
 
@@ -125,7 +140,23 @@
 					// handle error
 					console.log(error);
 				})
-			}
+			},
+			incrementPage() {
+				if (this.currentPage < this.pageCount) {
+					this.currentPage++;
+				}
+			},
+			decrementPage() {
+			if (this.currentPage > 1) {
+				this.currentPage--;
+				}
+			},
+			goToFirstPage() {
+				this.currentPage = 1;
+			},
+			goToLastPage() {
+				this.currentPage = this.pageCount;
+			},
 		},
 		created: function() {
 			this.getCustomers();

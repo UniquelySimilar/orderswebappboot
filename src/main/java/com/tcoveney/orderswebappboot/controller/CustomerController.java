@@ -44,13 +44,21 @@ public class CustomerController {
 		Map<String,String> stateList = Utils.getStateList();
 		model.addAttribute("stateList", stateList);
 	}
-
+	
+	// Standard JSP
+//	@GetMapping("/")
+//	public ModelAndView findAll() {
+//		//logger.debug("Called 'findAll()'");
+//		List<Customer> customers = customerDao.findAll();
+//		
+//		return new ModelAndView("customer/index", "customers", customers);
+//	}
+	
+	// View that uses Vue.js to retrieve customers via AJAX
 	@GetMapping("/")
-	public ModelAndView findAll() {
+	public String findAll() {
 		//logger.debug("Called 'findAll()'");
-		List<Customer> customers = customerDao.findAll();
-		
-		return new ModelAndView("customer/index", "customers", customers);
+		return "customer/indexVue";
 	}
 	
 	@GetMapping("/{id}")
