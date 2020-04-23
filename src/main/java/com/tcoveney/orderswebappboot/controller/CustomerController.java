@@ -112,5 +112,11 @@ public class CustomerController {
 		customerDao.delete(id);
 		return "redirect:/customers/";
 	}
+	
+	// TEMPORARY TEST
+	@GetMapping("/vuetest")
+	public String displayVueTest() {
+		return "customer/vuetest";
+	}
 
 }

@@ -3,12 +3,9 @@
 		<div class="row">
 			<div class="col-md-12">
 				<a class="btn btn-default" href="${pageContext.request.contextPath}/customers/create" role="button">Add Customer</a>
-				<h3>Customer List</h3>
-				
-				<!-- Used to seed customers table
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/customer/createcustomers" role="button">Create Customers</a>
-				 -->				
-				
+				<!-- Used to display Vue.js test page -->				
+				<a class="btn btn-success" href="${pageContext.request.contextPath}/customers/vuetest" role="button">Vue.js Test</a>
+				<h3>Customer List</h3>				
 				<c:choose>
 					<c:when test="${customers.size() > 0}">
 						<table id="customer-table" class="table table-striped">
