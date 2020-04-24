@@ -5,10 +5,16 @@
 
 <div id="customer-list" class="row">
 	<div class="col-md-12">
-		<span class="list-title">Customer List</span>
-		<a class="btn btn-default"
-			href="${pageContext.request.contextPath}/customers/create"
-			role="button">Create Customer</a>
+		<div>
+			<span class="list-title">Customer List</span>
+			<a class="btn btn-default"
+				href="${pageContext.request.contextPath}/customers/create"
+				role="button">Create Customer</a>
+			<div style="float: right;">
+				<span>Search by last name: </span><input type="text" v-model="searchTerm" v-on:keyup="searchLastName()">
+				<button type="button" class="btn btn-default btn-sm" style="margin-left: 1em;" v-on:click="clearSearch()">Clear</button>
+			</div>
+		</div>
 		<table id="customer-table" class="table table-striped table-bordered">
 			<thead>
 				<tr>
@@ -92,77 +98,9 @@
 		</div>
 	</div>
 </div>
-<script>
-	var app = new Vue({
-		el: '#customer-list',
-		data: {
-			customers: [],
-			unfilteredCustomers: [],
-			currentPage: 1,
-			pageSize: 10,
-			ascSort: true,
-			searchTerm: ""
-		},
-		computed: {
-			pageCount: function() {
-				return Math.ceil(this.customers.length / this.pageSize);
-			},
-			currentPageCustomers: function() {
-				let startIndex = (this.currentPage - 1) * this.pageSize;
-				let endIndex = this.currentPage * this.pageSize;
-				return this.customers.slice(startIndex, endIndex);
-			},
-			pageList: function() {
-				let tempAry = [];
-				for (let i = 0; i < this.pageCount; i++) {
-					tempAry.push(i + 1);
-				}
-				return tempAry;
-			},
-			sortArrow: function() {
-				if (this.ascSort) {
-					return "&#9652;"; // up arrow
-				}
-				else {
-					return "&#9662;"; // down arrow
-				}
-			}
-		},
-		methods: {
-			getCustomers: function() {
-				var that = this;
-				axios.get('${pageContext.request.contextPath}/api/customers/')
-				.then(function (response) {
-					// handle success
-					that.customers = response.data;
-				})
-				.catch(function (error) {
-					// handle error
-					console.log(error);
-				})
-			},
-			incrementPage() {
-				if (this.currentPage < this.pageCount) {
-					this.currentPage++;
-				}
-			},
-			decrementPage() {
-			if (this.currentPage > 1) {
-				this.currentPage--;
-				}
-			},
-			goToFirstPage() {
-				this.currentPage = 1;
-			},
-			goToLastPage() {
-				this.currentPage = this.pageCount;
-			},
-		},
-		created: function() {
-			this.getCustomers();
-		}
-	});
-	</script>
+
+<script src="<c:url value="/js/indexVue.js" />"></script>
+
 <script>
 	/*
 	$(document).ready(function() {
