@@ -23,7 +23,6 @@ public class CustomerApiController {
 	
 	@GetMapping("/")
 	public List<Customer> findAll() {
-		logger.debug("called 'findAll()'");
 		return customerDao.findAll();
 	}
 	

@@ -38,16 +38,19 @@
 					<td>{{ customer.email }}</td>
 					<td><a v-bind:href="'${pageContext.request.contextPath}/customers/' + customer.id + '/edit'" role="button">Edit</a></td>
 					<td>
-						<!-- 
-								<security:authorize access="hasRole('ROLE_ADMIN')">
-									<form:form id="form-delete-${customer.id}" cssClass="form-delete" method="DELETE"
-										action="${pageContext.request.contextPath}/customers/${customer.id}">
-										<input type="hidden" name="customerId" value="${customer.id}"/>
-										<input type="hidden" name="customerName" value="${customer.firstName}${' '}${customer.lastName}"/>
-										<button type="submit" class="btn btn-default submit-btn">Delete</button>
-									</form:form>
-								</security:authorize>
-							 --> &nbsp;
+						<!-- TODO: Implement confirm box or modal -->
+						<security:authorize access="hasRole('ROLE_ADMIN')">
+							<form v-bind:id="'form-delete-' + customer.id" class="form-delete" method="POST"
+								v-bind:action="'${pageContext.request.contextPath}/customers/'">
+								<input type="hidden" name="_method" value="DELETE"/>
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+								<input type="hidden" name="customerId" v-bind:value="customer.id"/>
+								<!-- 
+								<input type="hidden" name="customerName" v-bind:value="customer.firstName + ' ' + customer.lastName"/>
+								 -->
+								<button type="submit" class="btn btn-xs submit-btn">Delete</button>
+							</form>
+						</security:authorize>
 					</td>
 				</tr>
 			</tbody>

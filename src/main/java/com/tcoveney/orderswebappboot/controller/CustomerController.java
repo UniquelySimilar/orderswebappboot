@@ -115,16 +115,17 @@ public class CustomerController {
 		return "redirect:/customers/";
 	}
 	
-	@DeleteMapping("/{id}")
-	public String delete(@PathVariable int id) {
-		customerDao.delete(id);
+	@DeleteMapping("/")
+	public String delete(HttpServletRequest request) {
+		String customerId = request.getParameter("customerId");
+		customerDao.delete(Integer.parseInt(customerId));
 		return "redirect:/customers/";
 	}
 	
-	// TEMPORARY TEST
-	@GetMapping("/vuetest")
-	public String displayVueTest() {
-		return "customer/vuetest";
-	}
+//	@DeleteMapping("/{id}")
+//	public String delete(@PathVariable int id) {
+//		customerDao.delete(id);
+//		return "redirect:/customers/";
+//	}
 
 }
