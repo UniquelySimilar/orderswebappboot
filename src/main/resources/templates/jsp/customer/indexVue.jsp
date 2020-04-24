@@ -5,7 +5,7 @@
 
 <div id="customer-list" class="row">
 	<div class="col-md-12">
-		<div>
+		<div id="list-title">
 			<span class="list-title">Customer List</span>
 			<a class="btn btn-default"
 				href="${pageContext.request.contextPath}/customers/create"
@@ -18,7 +18,7 @@
 		<table id="customer-table" class="table table-striped table-bordered">
 			<thead>
 				<tr>
-					<th>Last Name</th>
+					<th>Last Name<span v-html="sortArrow" v-on:click="toggleSort()" style="float: right; cursor: pointer;"></span></th>
 					<th>First Name</th>
 					<th>City</th>
 					<th>State</th>

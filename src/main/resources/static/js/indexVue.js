@@ -111,7 +111,7 @@ new Vue({
 		},
 		clearSearch() {
 			this.searchTerm = '';
-			this.getCustomers();
+			this.customers = this.unfilteredCustomers.slice();
 		},
 	},
 	created: function() {

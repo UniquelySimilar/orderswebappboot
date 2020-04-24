@@ -15,6 +15,11 @@
 	margin-right: 2em;
 }
 
+#customer-table,
+#list-title {
+	margin-bottom: 0.7em;
+}
+
 #page-nav {
 	display: inline-block;
 }
