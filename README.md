@@ -10,3 +10,4 @@
 * Spring transaction management
 * MySQL Database
 * Spring Security including database authentication provider with encrypted passwords
+* On customer index page, replaced jQuery DataTables plugin with my own Vue.js implementation due to slow DataTables rendering.
