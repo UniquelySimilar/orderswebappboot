@@ -41,16 +41,14 @@
 					<td><a v-bind:href="'${pageContext.request.contextPath}/customers/' + customer.id + '/edit'" role="button">Edit</a></td>
 					<security:authorize access="hasRole('ROLE_ADMIN')">
 						<td>
-						<!-- TODO: Implement confirm box or modal -->
 							<form v-bind:id="'form-delete-' + customer.id" class="form-delete" method="POST"
 								v-bind:action="'${pageContext.request.contextPath}/customers/'">
 								<input type="hidden" name="_method" value="DELETE"/>
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								<input type="hidden" name="customerId" v-bind:value="customer.id"/>
-								<!-- 
-								<input type="hidden" name="customerName" v-bind:value="customer.firstName + ' ' + customer.lastName"/>
-								 -->
-								<button type="submit" class="btn btn-xs submit-btn">Delete</button>
+								<button type="submit" class="btn btn-xs submit-btn"
+								 v-on:click="confirmDelete('Delete customer ' 
+								 + customer.firstName + ' ' + customer.lastName + '?', $event)">Delete</button>
 							</form>
 						</td>
 					</security:authorize>
@@ -80,54 +78,9 @@
 			</select>
 			<span> of {{pageCount}}</span>
 		</div>
-	</div>
-</div>
-
-<div id="delete-modal" class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog modal-sm" role="document">
-		<div class="modal-content">
-
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title"></h4>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary delete-btn"
-					data-customer-id="">Delete</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			</div>
-
-		</div>
-	</div>
-</div>
+	</div>	
+</div><!-- .row -->
 
 <script src="<c:url value="/js/indexVue.js" />"></script>
-
-<script>
-	/*
-	$(document).ready(function() {
-		$('#customer-table').on('click', '.form-delete .submit-btn', function(event) {
-			// Prevent form submission and display modal
-			event.preventDefault();
-			var customerId = $(this).siblings("input[name='customerId']").val();
-			var customerName = $(this).siblings("input[name='customerName']").val();
-			$('#delete-modal .modal-title').text('Delete ' + customerName + '?');
-			$('#delete-modal .delete-btn').attr('data-customer-id', customerId);
-			$('#delete-modal').modal('show');
-		});
-		
-		$('#delete-modal .delete-btn').click(function() {
-			var customerId = $(this).attr('data-customer-id');
-			var formId = "#form-delete-" + customerId;
-			deleteConfirmed = true;
-			$(formId).submit();
-			$('#delete-modal').modal('hide');
-		});
-	});
-	*/
-	</script>
 
 <%@ include file="../footer.jsp"%>

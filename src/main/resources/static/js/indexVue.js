@@ -113,6 +113,11 @@ new Vue({
 			this.searchTerm = '';
 			this.customers = this.unfilteredCustomers.slice();
 		},
+		confirmDelete(message, event) {
+			if (!window.confirm(message)) {
+				event.preventDefault();
+			}
+		}
 	},
 	created: function() {
 		this.getCustomers();
