@@ -1,12 +1,13 @@
 new Vue({
-	el: '#customer-list',
+	el: '#vue-root',
 	data: {
 		customers: [],
 		unfilteredCustomers: [],
 		currentPage: 1,
 		pageSize: 10,
 		ascSort: true,
-		searchTerm: ""
+		searchTerm: "",
+		deleteCustomerId: 0
 	},
 	computed: {
 		pageCount: function() {
@@ -34,7 +35,7 @@ new Vue({
 		}
 	},
 	methods: {
-		getCustomers: function() {
+		getCustomers() {
 			this.searchTerm = '';
 			let that = this;
 			axios.get('/orderswebappboot/api/customers/')
@@ -113,10 +114,16 @@ new Vue({
 			this.searchTerm = '';
 			this.customers = this.unfilteredCustomers.slice();
 		},
-		confirmDelete(message, event) {
-			if (!window.confirm(message)) {
-				event.preventDefault();
-			}
+		displayDeleteModal(customerId, customerName) {
+			this.deleteCustomerId = customerId;
+			$('#delete-modal .modal-title').text('Delete ' + customerName + '?');
+			$('#delete-modal').modal('show');
+		},
+		submitDelete() {
+			var formId = "#form-delete-" + this.deleteCustomerId;
+			$(formId).submit();
+			$('#delete-modal').modal('hide');
+			this.deleteCustomerId = 0;
 		}
 	},
 	created: function() {

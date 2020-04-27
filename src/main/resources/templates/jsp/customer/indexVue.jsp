@@ -3,6 +3,7 @@
 <script src="<c:url value="/js/vue.js" />"></script>
 <script src="<c:url value="/js/axios.js" />"></script>
 
+<div id="vue-root">
 <div v-cloak id="customer-list" class="row">
 	<div class="col-md-12">
 		<div id="list-title">
@@ -26,7 +27,7 @@
 					<th>Email</th>
 					<th></th>
 					<security:authorize access="hasRole('ROLE_ADMIN')">
-						<th></th> <!-- Delete column -->
+						<th></th> <!-- 'Delete' column -->
 					</security:authorize>
 				</tr>
 			</thead>
@@ -47,8 +48,7 @@
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								<input type="hidden" name="customerId" v-bind:value="customer.id"/>
 								<button type="submit" class="btn btn-xs submit-btn"
-								 v-on:click="confirmDelete('Delete customer ' 
-								 + customer.firstName + ' ' + customer.lastName + '?', $event)">Delete</button>
+								 v-on:click.prevent="displayDeleteModal(customer.id, customer.firstName + ' ' + customer.lastName)">Delete</button>
 							</form>
 						</td>
 					</security:authorize>
@@ -79,7 +79,28 @@
 			<span> of {{pageCount}}</span>
 		</div>
 	</div>	
-</div><!-- .row -->
+</div><!-- #customer-list -->
+
+<div id="delete-modal" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary delete-btn" v-on:click="submitDelete()">Delete</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+</div><!-- #vue-root -->
 
 <script src="<c:url value="/js/indexVue.js" />"></script>
 
