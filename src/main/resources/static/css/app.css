@@ -29,3 +29,9 @@
 	margin: 21px 0 19px 10px;
 	vertical-align: top;
 }
+
+/* Hide element with un-compiled mustache bindings until the Vue instance is ready */
+[v-cloak] {
+	display: none;
+}
+

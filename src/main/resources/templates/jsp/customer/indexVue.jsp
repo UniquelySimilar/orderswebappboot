@@ -3,7 +3,7 @@
 <script src="<c:url value="/js/vue.js" />"></script>
 <script src="<c:url value="/js/axios.js" />"></script>
 
-<div id="customer-list" class="row">
+<div v-cloak id="customer-list" class="row">
 	<div class="col-md-12">
 		<div id="list-title">
 			<span class="list-title">Customer List</span>
@@ -25,7 +25,9 @@
 					<th>Zip Code</th>
 					<th>Email</th>
 					<th></th>
-					<th></th>
+					<security:authorize access="hasRole('ROLE_ADMIN')">
+						<th></th> <!-- Delete column -->
+					</security:authorize>
 				</tr>
 			</thead>
 			<tbody>
@@ -37,9 +39,9 @@
 					<td>{{ customer.zipcode }}</td>
 					<td>{{ customer.email }}</td>
 					<td><a v-bind:href="'${pageContext.request.contextPath}/customers/' + customer.id + '/edit'" role="button">Edit</a></td>
-					<td>
+					<security:authorize access="hasRole('ROLE_ADMIN')">
+						<td>
 						<!-- TODO: Implement confirm box or modal -->
-						<security:authorize access="hasRole('ROLE_ADMIN')">
 							<form v-bind:id="'form-delete-' + customer.id" class="form-delete" method="POST"
 								v-bind:action="'${pageContext.request.contextPath}/customers/'">
 								<input type="hidden" name="_method" value="DELETE"/>
@@ -50,8 +52,8 @@
 								 -->
 								<button type="submit" class="btn btn-xs submit-btn">Delete</button>
 							</form>
-						</security:authorize>
-					</td>
+						</td>
+					</security:authorize>
 				</tr>
 			</tbody>
 		</table>
