@@ -3,11 +3,12 @@ new Vue({
 	data: {
 		customers: [],
 		unfilteredCustomers: [],
+		customer: {},
+		deleteCustomerId: 0,
 		currentPage: 1,
 		pageSize: 10,
 		ascSort: true,
-		searchTerm: "",
-		deleteCustomerId: 0
+		searchTerm: ""
 	},
 	computed: {
 		pageCount: function() {
@@ -113,6 +114,19 @@ new Vue({
 		clearSearch() {
 			this.searchTerm = '';
 			this.customers = this.unfilteredCustomers.slice();
+		},
+		displayDetailModal(customerId) {
+			console.log(customerId);
+			let that = this;
+			axios.get('/orderswebappboot/api/customers/' + customerId)
+			.then(function(response) {
+				that.customer = response.data;
+				console.log(that.customer);
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+			$('#detail-modal').modal('show');
 		},
 		displayDeleteModal(customerId, customerName) {
 			this.deleteCustomerId = customerId;

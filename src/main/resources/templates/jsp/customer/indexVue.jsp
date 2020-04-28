@@ -33,7 +33,9 @@
 			</thead>
 			<tbody>
 				<tr v-for="customer in currentPageCustomers" v-bind:key="customer.id">
-					<td>{{ customer.lastName }}</td>
+					<td>
+						<button type="button" class="btn btn-link" v-on:click="displayDetailModal(customer.id)">{{ customer.lastName }}</button>
+					</td>
 					<td>{{ customer.firstName }}</td>
 					<td>{{ customer.city }}</td>
 					<td>{{ customer.state }}</td>
@@ -81,7 +83,8 @@
 	</div>	
 </div><!-- #customer-list -->
 
-<div id="delete-modal" class="modal fade" tabindex="-1" role="dialog">
+<!-- Confirm customer delete modal -->
+<div id="delete-modal" class="modal" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content">
 
@@ -99,6 +102,60 @@
 		</div>
 	</div>
 </div>
+
+<!-- Customer detail modal -->
+<div class="modal" id="detail-modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Customer Detail</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-4 detail-label">First Name:</div>
+					<div class="col-md-8">{{ customer.firstName }}</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 detail-label">Last Name:</div>
+					<div class="col-md-8">{{ customer.lastName }}</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 detail-label">Street:</div>
+					<div class="col-md-8">{{ customer.street }}</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 detail-label">City:</div>
+					<div class="col-md-8">{{ customer.city }}</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 detail-label">State:</div>
+					<div class="col-md-8">{{ customer.state }}</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 detail-label">Zip Code:</div>
+					<div class="col-md-8">{{ customer.zipcode }}</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 detail-label">Home Phone:</div>
+					<div class="col-md-8">{{ customer.homePhone }}</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 detail-label">Work Phone:</div>
+					<div class="col-md-8">{{ customer.workPhone }}</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 detail-label">Email:</div>
+					<div class="col-md-8">{{ customer.email }}</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 </div><!-- #vue-root -->
 
