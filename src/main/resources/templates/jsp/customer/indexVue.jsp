@@ -47,7 +47,7 @@
 								<input type="hidden" name="_method" value="DELETE"/>
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								<input type="hidden" name="customerId" v-bind:value="customer.id"/>
-								<button type="submit" class="btn btn-xs submit-btn"
+								<button type="submit" class="btn btn-link"
 								 v-on:click.prevent="displayDeleteModal(customer.id, customer.firstName + ' ' + customer.lastName)">Delete</button>
 							</form>
 						</td>

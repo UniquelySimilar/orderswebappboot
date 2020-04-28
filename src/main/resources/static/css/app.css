@@ -15,9 +15,8 @@
 	margin-right: 2em;
 }
 
-#customer-table,
-#list-title {
-	margin-bottom: 0.7em;
+#customer-table {
+	margin-bottom: 0;
 }
 
 #page-nav {
@@ -35,3 +34,6 @@
 	display: none;
 }
 
+.btn-link {
+	padding: 0;
+}
