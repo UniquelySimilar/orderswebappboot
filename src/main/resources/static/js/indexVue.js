@@ -42,8 +42,7 @@ new Vue({
 			axios.get('/orderswebappboot/api/customers/')
 			.then(function (response) {
 				that.customers = response.data;
-				// Initialize sort to lastName ascending
-				that.customers.sort(that.compareLastNamesAsc);
+				// Initial sort from server is lastName ascending
 				that.unfilteredCustomers = that.customers.slice();
 				that.currentPage = 1;
 				that.ascSort = true;

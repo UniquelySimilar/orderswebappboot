@@ -23,7 +23,7 @@ public class CustomerApiController {
 	
 	@GetMapping("/")
 	public List<Customer> findAll() {
-		return customerDao.findAll();
+		return customerDao.findAllOrderByLastName();
 	}
 	
 	@GetMapping("/{id}")
