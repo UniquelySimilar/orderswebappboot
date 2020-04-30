@@ -2,7 +2,6 @@ new Vue({
 	el: '#vue-root',
 	data: {
 		customers: [],
-		unfilteredCustomers: [],
 		customer: {},
 		deleteCustomerId: 0,
 		currentPage: 1,
@@ -12,12 +11,22 @@ new Vue({
 	},
 	computed: {
 		pageCount: function() {
-			return Math.ceil(this.customers.length / this.pageSize);
+			return Math.ceil(this.filteredCustomers.length / this.pageSize);
+		},
+		filteredCustomers() {
+			if (this.searchTerm.length < 1) {
+				return this.customers.slice();
+			}
+			else {
+				return this.customers.filter(customer => {
+					return customer.lastName.toLowerCase().substring(0, this.searchTerm.length) === this.searchTerm.toLowerCase();
+				});
+			}
 		},
 		currentPageCustomers: function() {
 			let startIndex = (this.currentPage - 1) * this.pageSize;
 			let endIndex = this.currentPage * this.pageSize;
-			return this.customers.slice(startIndex, endIndex);
+			return this.filteredCustomers.slice(startIndex, endIndex);
 		},
 		pageList: function() {
 			let tempAry = [];
@@ -43,7 +52,6 @@ new Vue({
 			.then(function (response) {
 				that.customers = response.data;
 				// Initial sort from server is lastName ascending
-				that.unfilteredCustomers = that.customers.slice();
 				that.currentPage = 1;
 				that.ascSort = true;
 			})
@@ -71,10 +79,10 @@ new Vue({
 		toggleSort() {
 			this.ascSort = !this.ascSort;
 			if (this.ascSort) {
-				this.customers.sort(this.compareLastNamesAsc);
+				this.filteredCustomers.sort(this.compareLastNamesAsc);
 			}
 			else {
-				this.customers.sort(this.compareLastNamesDesc);
+				this.filteredCustomers.sort(this.compareLastNamesDesc);
 			}
 		},
 		compareLastNamesAsc(a, b) {
@@ -96,18 +104,9 @@ new Vue({
 			return 0;
 		},
 		searchLastName() {
-			console.log("called 'searchLastName()'");
-			if (this.searchTerm.length < 1) {
-				// Reset in case hitting backspace
-				this.customers = this.unfilteredCustomers.slice();
-				this.currentPage = 1;
-				return;
-			}
-
-			// Filter customers by last name
-			this.customers = this.unfilteredCustomers.filter(customer => {
-				return customer.lastName.toLowerCase().substring(0, this.searchTerm.length) === this.searchTerm.toLowerCase();
-			});
+			//console.log("called 'searchLastName()'");
+			// The array of filtered customers is now a computed property,
+			// so reset the current page whenever the searchTerm input value changes
 			this.currentPage = 1;
 		},
 		clearSearch() {
