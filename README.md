@@ -1,4 +1,4 @@
-# Spring Boot Web Application (IN PROGRESS)
+# Spring Boot Web Application
 ### Port of my non-Boot Spring web application [SpringMvcWebApp](https://github.com/UniquelySimilar/SpringMvcWebApp)
 * Web application built using the Spring Boot 2
 * Maven project developed using the Eclipse IDE
