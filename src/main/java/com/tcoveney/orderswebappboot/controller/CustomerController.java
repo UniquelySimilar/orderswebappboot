@@ -23,38 +23,27 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tcoveney.orderswebappboot.Utils;
 import com.tcoveney.orderswebappboot.dao.CustomerDao;
-import com.tcoveney.orderswebappboot.dao.OrderDao;
 import com.tcoveney.orderswebappboot.model.Customer;
-import com.tcoveney.orderswebappboot.model.CustomerWithOrders;
-import com.tcoveney.orderswebappboot.model.Order;
 
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 	
-	@Autowired
 	private CustomerDao customerDao;
 	
-	@Autowired
-	private OrderDao orderDao;
+	public CustomerController(CustomerDao customerDao) {
+		this.customerDao = customerDao;
+	}
 	
 	@ModelAttribute
 	public void addAttributes(Model model) {
 		Map<String,String> stateList = Utils.getStateList();
 		model.addAttribute("stateList", stateList);
 	}
-	
-	// Standard JSP
-//	@GetMapping("/")
-//	public ModelAndView findAll() {
-//		//logger.debug("Called 'findAll()'");
-//		List<Customer> customers = customerDao.findAll();
-//		
-//		return new ModelAndView("customer/index", "customers", customers);
-//	}
-	
-	// View that uses Vue.js to retrieve customers via AJAX
+		
+	// View that uses Vue.js to retrieve customers via AJAX for better performance
+	// and additional client side search/sort functionality
 	@GetMapping("/")
 	public String findAll() {
 		//logger.debug("Called 'findAll()'");
@@ -71,21 +60,6 @@ public class CustomerController {
 	public ModelAndView displayCreateForm() {
 		return new ModelAndView("customer/create", "customer", new Customer());
 	}
-	
-	// TODO	
-//	@GetMapping("/{customerId}/orders")
-//	public CustomerWithOrders findWithOrders(@PathVariable int customerId, HttpServletResponse response){
-//		CustomerWithOrders cwo = new CustomerWithOrders();
-//		Customer customer = customerDao.find(customerId);
-//		if (null == customer) {
-//		}
-//		else {
-//			List<Order> orders = orderDao.findByCustomer(customerId);
-//			cwo.setCustomer(customer);
-//			cwo.setOrders(orders);
-//		}
-//		return cwo;
-//	}
 	
 	@PostMapping(value = "/save")
 	public String save(@ModelAttribute @Valid Customer customer, BindingResult bindingResult) {
